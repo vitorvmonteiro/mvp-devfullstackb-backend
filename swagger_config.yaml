@@ -1,0 +1,75 @@
+swagger: '2.0'
+info:
+  title: API de Incidentes
+  description: API para gerenciamento de incidentes.
+  version: "1.0.0"
+host: "127.0.0.1:5000"
+schemes:
+  - http
+paths:
+  /api/incidentes:
+    get:
+      summary: Lista todos os incidentes.
+      responses:
+        200:
+          description: Lista de incidentes retornada com sucesso.
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: ID do incidente.
+                ambiente:
+                  type: string
+                  description: Ambiente do incidente.
+                cluster:
+                  type: string
+                  description: Cluster relacionado.
+                servico:
+                  type: string
+                  description: Serviço afetado.
+                criticidade:
+                  type: string
+                  description: Nível de criticidade.
+                descricao:
+                  type: string
+                  description: Descrição do incidente.
+                data_hora:
+                  type: string
+                  description: Data e hora do incidente.
+    post:
+      summary: Cria um novo incidente.
+      parameters:
+        - name: incidente
+          in: body
+          schema:
+            type: object
+            properties:
+              ambiente:
+                type: string
+              cluster:
+                type: string
+              servico:
+                type: string
+              criticidade:
+                type: string
+              descricao:
+                type: string
+              data_hora:
+                type: string
+      responses:
+        201:
+          description: Incidente criado com sucesso.
+  /api/incidentes/{id}:
+    delete:
+      summary: Deleta um incidente pelo ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+      responses:
+        200:
+          description: Incidente deletado com sucesso.

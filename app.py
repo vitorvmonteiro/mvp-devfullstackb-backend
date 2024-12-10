@@ -2,8 +2,12 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS  # Importa o CORS
 from database.incidentes import Incidente
 from database import db, init_app
+from flasgger import Swagger
+import os
 
 app = Flask(__name__)
+swagger_config_path = os.path.join(os.path.dirname(__file__), 'swagger_config.yaml')
+Swagger(app, template_file=swagger_config_path)
 CORS(app)  # Habilita CORS para todas as rotas
 
 # Inicializa o banco de dados
